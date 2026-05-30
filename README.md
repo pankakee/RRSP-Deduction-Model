@@ -4,7 +4,7 @@ An automated, data-driven financial modeling tool designed to maximize the Net P
 Built entirely within Excel using a heuristic optimization sweep (Hill-Climbing Local Search Algorithm), this VBA macro determines the mathematically ideal allocation of 
 multi-year RRSP deductions across fluctuating income tax brackets. 
 
-This algorithm, works because TVM is a strictly smooth, monotonic exponential decay curve and the Canadian tax schedule is a non-decreasing step-function.
+This algorithm works because TVM is a strictly smooth, monotonic exponential decay curve and the Canadian tax schedule is a non-decreasing step-function.
 When you combine an upward-trending step function with a smooth exponential decay curve, you get a well-behaved, single-peaked landscape. Hence the heurisitc optimzation will find the global maximum of the landscape.
 
 ---
@@ -72,7 +72,7 @@ The macro functions as follows:
 1. **Establishes a Baseline:** Evaluates the spreadsheet’s current state and records the initial `Total PV Refund`.
 2. **Executes a Time-Shifting Sweep:** Loops through every historical year $i$ and compares it to every future year $j$.
 3. **Simulates Changes:** Shaves a small block of deductions ($\$500$) from year $i$ (where income might be lower) and reallocates it to year $j$ (where income might be higher).
-4. **Evaluates Objective Function:** Checks cell `V20`. If the global NPV increases, the change is permanently locked in. If it decreases or stays the same, the shift is rolled back.
+4. **Evaluates Objective Function:** Checks cell `S6`. If the global NPV increases, the change is permanently locked in. If it decreases or stays the same, the shift is rolled back.
 5. **Convergence:** Continues iterating through the entire multi-year matrix until a full pass results in absolutely zero incremental improvements to the total PV.
 
 ---
@@ -87,7 +87,9 @@ The macro functions as follows:
 ### Instructions
 
 1. Open `RRSP Deduction Model.xlsm`.
-2. Populate your **Projected Salary** profile and desired annual **RRSP Contribution Amounts** based on your savings capacity.
-3. Ensure your discount rate/yearly investment return metric is configured correctly.
-4. Press **`Alt + F8`**, select `OptimizeRRSP_Fixed`, and click **Run**.
-5. The model will run silently in a fraction of a second, automatically rewriting Column M to reveal your mathematically optimized deduction roadmap.
+2. Enter the desired number of years to project in "Total Years".
+3. Click on the "Resize Table to Time Horizon" button.
+4. Populate your **Projected Salary** profile and desired annual **RRSP Contribution Amounts** based on your savings capacity.
+5. Ensure your discount rate is configured correctly (corresponding to expected return on investments).
+6. Click on the "Run RRSP Optimization Button".
+7. The model will run silently in a fraction of a second, automatically rewriting Column M to reveal your mathematically optimized deduction roadmap.
